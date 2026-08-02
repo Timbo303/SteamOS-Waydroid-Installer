@@ -71,7 +71,7 @@ echo Installing Paru AUR Helper. This can take a while.
 cd $WORKING_DIR
 echo "*** pacman install paru ***" &>> $LOGFILE
 git clone https://aur.archlinux.org/paru.git
-echo -e "$current_password\n" | sudo pacman -S --needed base-devel &>> $LOGFILE
+echo -e "$current_password\n" | sudo pacman -S --needed base-devel debugedit fakeroot &>> $LOGFILE
 cd paru
 makepkg -si
 
