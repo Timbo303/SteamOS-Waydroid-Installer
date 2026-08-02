@@ -57,6 +57,8 @@ fi
 echo Unlocking SteamOS and initializing keyring via steamos-devmode. This can take a while.
 echo "*** steamos-devmode ***" &> $LOGFILE
 echo -e "$current_password\n" | sudo -S steamos-devmode enable --no-prompt &>> $LOGFILE
+echo -e "$current_password\n" | sudo -S steamos-readonly disable --no-prompt &>> $LOGFILE
+
 
 if [ $? -eq 0 ]
 then
