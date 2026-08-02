@@ -68,10 +68,10 @@ fi
 
 #Install Paru AUR Helper
 echo Installing Paru AUR Helper. This can take a while.
-cd $WORKING_DIR
 echo "*** pacman install paru ***" &>> $LOGFILE
+cd $WORKING_DIR
+echo -e "$current_password\n" | sudo -S pacman base-devel debugedit fakeroot &>> $LOGFILE
 git clone https://aur.archlinux.org/paru.git
-echo -e "$current_password\n" | sudo -S pacman --needed base-devel debugedit fakeroot &>> $LOGFILE
 cd paru
 makepkg -si
 
@@ -83,6 +83,7 @@ else
 	cleanup_exit
 fi
 
+exit
 
 sudo pacman -S ninja base-devel libisl libmpc glib2 linux-api-headers python3 systemd-libs libxkbcommon libxcb pixman xcb-util-wm pacman libarchive fakeroot debugedit dkms glibc cmake libsysprof-capture pcre2 libffi expat libxml2 xz icu zlib wayland-protocols libliftoff libdrm libglvnd vulkan-icd-loader vulkan-radeon mesa vulkan-tools vulkan-headers libinput seatd lcms2 libdisplay-info xcb-util libxcb qt5-base xcb-util-renderutil xcb-util-errors xcb-util-cursor wlr-protocols wlr-randr wf-recorder xdg-desktop-portal-wlr udev xorg-xwayland meson colord glslang pkg-config libxau xorg-xdm xorgproto libxdmcp scdoc
 
