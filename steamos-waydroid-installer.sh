@@ -57,7 +57,6 @@ fi
 echo Unlocking SteamOS and initializing keyring via steamos-devmode. This can take a while.
 echo "*** steamos-devmode ***" &> $LOGFILE
 echo -e "$current_password\n" | sudo -S steamos-devmode enable --no-prompt &>> $LOGFILE
-echo -e "$current_password\n" | sudo -S steamos-readonly disable --no-prompt &>> $LOGFILE
 
 
 if [ $? -eq 0 ]
@@ -73,7 +72,7 @@ echo Installing Paru AUR Helper. This can take a while.
 echo "*** pacman install paru ***" &>> $LOGFILE
 cd $WORKING_DIR
 echo -e "$current_password\n" | sudo -S pacman -Syu ninja base-devel openssl libcrypto libarchive libcurl gpgme libisl libmpc glib2 linux-api-headers python3 systemd-libs libxkbcommon libxcb pixman xcb-util-wm pacman libarchive fakeroot debugedit dkms glibc cmake libsysprof-capture pcre2 libffi expat libxml2 xz icu zlib wayland-protocols libliftoff libdrm libglvnd vulkan-icd-loader vulkan-radeon mesa vulkan-tools vulkan-headers libinput seatd lcms2 libdisplay-info xcb-util libxcb qt5-base xcb-util-renderutil xcb-util-errors xcb-util-cursor wlr-protocols wlr-randr wf-recorder xdg-desktop-portal-wlr udev xorg-xwayland meson colord glslang pkg-config libxau xorg-xdm xorgproto libxdmcp scdoc --noconfirm --overwrite "*" &>> $LOGFILE
-export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH"
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si --noconfirm
