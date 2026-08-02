@@ -66,6 +66,28 @@ else
 	cleanup_exit
 fi
 
+#Install Paru AUR Helper
+echo Installing Paru AUR Helper. This can take a while.
+cd $WORKING_DIR
+echo "*** pacman install paru ***" &>> $LOGFILE
+git clone https://aur.archlinux.org/paru.git
+echo -e "$current_password\n" | sudo pacman -S --needed base-devel &>> $LOGFILE
+cd paru
+makepkg -si
+
+if [ $? -eq 0 ]
+then
+	echo Paru successfully installed!
+else
+	echo Error Installing Paru
+	cleanup_exit
+fi
+
+
+sudo pacman -S ninja base-devel libisl libmpc glib2 linux-api-headers python3 systemd-libs libxkbcommon libxcb pixman xcb-util-wm pacman libarchive fakeroot debugedit dkms glibc cmake libsysprof-capture pcre2 libffi expat libxml2 xz icu zlib wayland-protocols libliftoff libdrm libglvnd vulkan-icd-loader vulkan-radeon mesa vulkan-tools vulkan-headers libinput seatd lcms2 libdisplay-info xcb-util libxcb qt5-base xcb-util-renderutil xcb-util-errors xcb-util-cursor wlr-protocols wlr-randr wf-recorder xdg-desktop-portal-wlr udev xorg-xwayland meson colord glslang pkg-config libxau xorg-xdm xorgproto libxdmcp scdoc
+
+
+
 # ok lets install precompiled waydroid
 echo Installing waydroid packages. This can take a while.
 echo "*** pacman install waydroid packages ***" &>> $LOGFILE
