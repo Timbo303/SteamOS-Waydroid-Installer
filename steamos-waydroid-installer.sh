@@ -73,7 +73,7 @@ cd $WORKING_DIR
 echo -e "$current_password\n" | sudo -S pacman -S base-devel debugedit fakeroot --noconfirm &>> $LOGFILE
 git clone https://aur.archlinux.org/paru.git
 cd paru
-makepkg -si
+makepkg -si --no-confirm
 
 if [ $? -eq 0 ]
 then
