@@ -119,7 +119,7 @@ fi
 echo Installing wlroots 0.20 from source. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt.
 echo "*** makepkg install wlroots  ***" &>> $LOGFILE
 cd $WORKING_DIR
-echo -e "$current_password\n" | sudo -S pacman -S hwdata libliftoff cairo &>> $LOGFILE
+echo -e "$current_password\n" | sudo -S pacman -S hwdata libliftoff cairo --noconfirm &>> $LOGFILE
 git clone -b 0.20 https://gitlab.freedesktop.org/wlroots/wlroots/
 cd wlroots
 meson setup build/
