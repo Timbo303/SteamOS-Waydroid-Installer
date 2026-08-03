@@ -67,7 +67,7 @@ else
 	cleanup_exit
 fi
 
-#Install Paru AUR Helper
+#Install pikaur AUR Helper
 echo Installing pikaur AUR Helper. This can take a while.
 echo "*** pacman install pikaur ***" &>> $LOGFILE
 cd $WORKING_DIR
