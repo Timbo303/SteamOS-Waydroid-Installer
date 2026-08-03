@@ -100,6 +100,7 @@ else
 	cleanup_exit
 fi
 
+exit
 
 # ok lets install precompiled waydroid
 echo Installing waydroid packages. This can take a while.
