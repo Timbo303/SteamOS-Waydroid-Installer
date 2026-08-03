@@ -68,7 +68,7 @@ else
 fi
 
 #Install pikaur AUR Helper
-echo Installing pikaur AUR Helper. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt (or No if it wants to show Diff)
+echo Installing pikaur AUR Helper. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt or No if it wants to show Diff.
 echo "*** pacman install pikaur ***" &>> $LOGFILE
 cd $WORKING_DIR
 echo -e "$current_password\n" | sudo -S pacman -S --needed base-devel --noconfirm &>> $LOGFILE
@@ -86,7 +86,7 @@ else
 fi
 
 #Install wayland-chromium
-echo Installing wayland-protocols-git. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt (Or No if it wants to show Diff)
+echo Installing wayland-protocols-git. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt or No if it wants to show Diff.
 echo "*** pacman install wayland-chromium  ***" &>> $LOGFILE
 echo -e "$current_password\n" | sudo -S pacman -S ninja base-devel libisl libmpc glib2 linux-api-headers python3 systemd-libs libxkbcommon libxcb pixman xcb-util-wm pacman libarchive fakeroot debugedit dkms glibc cmake libsysprof-capture pcre2 libffi expat libxml2 xz icu zlib wayland-protocols libliftoff libdrm libglvnd vulkan-icd-loader vulkan-radeon mesa vulkan-tools vulkan-headers libinput seatd lcms2 libdisplay-info xcb-util libxcb qt5-base xcb-util-renderutil xcb-util-errors xcb-util-cursor wlr-protocols wlr-randr wf-recorder xdg-desktop-portal-wlr udev xorg-xwayland meson colord glslang pkg-config libxau xorg-xdm xorgproto libxdmcp scdoc --noconfirm &>> $LOGFILE
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/lib:/usr/local/lib:$PKG_CONFIG_PATH"
@@ -103,7 +103,7 @@ fi
 
 
 #Install wayland-protocols-git
-echo Installing wayland-protocols-git. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt. (Or No if it wants to show Diff)
+echo Installing wayland-protocols-git. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt or No if it wants to show Diff.
 echo "*** pacman install wayland-protocols-git  ***" &>> $LOGFILE
 pikaur -S wayland-protocols-git
 
