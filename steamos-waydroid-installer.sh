@@ -68,7 +68,7 @@ else
 fi
 
 #Install pikaur AUR Helper
-echo Installing pikaur AUR Helper. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt or No if it wants to show Diff.
+echo Installing pikaur AUR Helper. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt
 echo "*** pacman install pikaur ***" &>> $LOGFILE
 cd $WORKING_DIR
 echo -e "$current_password\n" | sudo -S pacman -S --needed base-devel --noconfirm &>> $LOGFILE
@@ -86,11 +86,11 @@ else
 fi
 
 #Install wayland-chromium
-echo Installing wayland-protocols-git. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt or No if it wants to show Diff.
-echo "*** pacman install wayland-chromium  ***" &>> $LOGFILE
+echo Installing wayland-chromium. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt.
+echo "*** pikaur install wayland-chromium  ***" &>> $LOGFILE
 echo -e "$current_password\n" | sudo -S pacman -S ninja base-devel libisl libmpc glib2 linux-api-headers python3 systemd-libs libxkbcommon libxcb pixman xcb-util-wm pacman libarchive fakeroot debugedit dkms glibc cmake libsysprof-capture pcre2 libffi expat libxml2 xz icu zlib wayland-protocols libliftoff libdrm libglvnd vulkan-icd-loader vulkan-radeon mesa vulkan-tools vulkan-headers libinput seatd lcms2 libdisplay-info xcb-util libxcb qt5-base xcb-util-renderutil xcb-util-errors xcb-util-cursor wlr-protocols wlr-randr wf-recorder xdg-desktop-portal-wlr udev xorg-xwayland meson colord glslang pkg-config libxau xorg-xdm xorgproto libxdmcp scdoc --noconfirm &>> $LOGFILE
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/lib:/usr/local/lib:$PKG_CONFIG_PATH"
-pikaur -S wayland-chromium
+pikaur -S wayland-chromium --nodiff
 
 if [ $? -eq 0 ]
 then
@@ -103,9 +103,9 @@ fi
 
 
 #Install wayland-protocols-git
-echo Installing wayland-protocols-git. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt or No if it wants to show Diff.
-echo "*** pacman install wayland-protocols-git  ***" &>> $LOGFILE
-pikaur -S wayland-protocols-git
+echo Installing wayland-protocols-git. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt.
+echo "*** pikaur install wayland-protocols-git  ***" &>> $LOGFILE
+pikaur -S wayland-protocols-git --nodiff
 
 if [ $? -eq 0 ]
 then
@@ -115,7 +115,43 @@ else
 	cleanup_exit
 fi
 
-exit
+#Install wlroots 0.20 from source
+echo Installing wlroots 0.20 from source. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt.
+echo "*** makepkg install wlroots  ***" &>> $LOGFILE
+cd $WORKING_DIR
+git clone -b 0.20 https://gitlab.freedesktop.org/wlroots/wlroots/
+cd wlroots
+meson setup build/
+ninja -C build/
+echo -e "$current_password\n" | sudo -S ninja -C build/ install &>> $LOGFILE
+
+if [ $? -eq 0 ]
+then
+	echo wlroots 0.20 successfully installed!
+else
+	echo Error Installing wlroots 0.20 from source
+	cleanup_exit
+fi
+
+#Install cage from source
+echo Installing cage from source. This can take a while. When Prompted Either Type Sudo Password or Yes to a Prompt.
+echo "*** makepkg install cage  ***" &>> $LOGFILE
+echo -e "$current_password\n" | sudo -S cp build/libwlroots-0.20.so /usr/lib/ &>> $LOGFILE
+cd $WORKING_DIR
+export PATH="$PATH:/usr/local/lib"
+git clone https://github.com/cage-kiosk/cage
+cd cage
+meson setup build/
+meson compile -C build/
+echo -e "$current_password\n" | sudo -S cp build/cage /usr/bin/ &>> $LOGFILE
+
+if [ $? -eq 0 ]
+then
+	echo cage successfully installed!
+else
+	echo Error Installing cage from source
+	cleanup_exit
+fi
 
 # ok lets install precompiled waydroid
 echo Installing waydroid packages. This can take a while.
