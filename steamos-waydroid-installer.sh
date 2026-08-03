@@ -85,7 +85,21 @@ else
 	cleanup_exit
 fi
 
-exit
+#Install wayland-protocols-git
+echo Installing wayland-protocols-git. This can take a while.
+echo "*** pacman install wayland-protocols-git  ***" &>> $LOGFILE
+echo -e "$current_password\n" | sudo -S pacman -S ninja base-devel libisl libmpc glib2 linux-api-headers python3 systemd-libs libxkbcommon libxcb pixman xcb-util-wm pacman libarchive fakeroot debugedit dkms glibc cmake libsysprof-capture pcre2 libffi expat libxml2 xz icu zlib wayland-protocols libliftoff libdrm libglvnd vulkan-icd-loader vulkan-radeon mesa vulkan-tools vulkan-headers libinput seatd lcms2 libdisplay-info xcb-util libxcb qt5-base xcb-util-renderutil xcb-util-errors xcb-util-cursor wlr-protocols wlr-randr wf-recorder xdg-desktop-portal-wlr udev xorg-xwayland meson colord glslang pkg-config libxau xorg-xdm xorgproto libxdmcp scdoc --noconfirm &>> $LOGFILE
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/lib:/usr/local/lib:$PKG_CONFIG_PATH"
+pikaur -S wayland-protocols-git --noconfirm
+
+if [ $? -eq 0 ]
+then
+	echo wayland-protocols-git successfully installed!
+else
+	echo Error Installing wayland-protocols-git
+	cleanup_exit
+fi
+
 
 # ok lets install precompiled waydroid
 echo Installing waydroid packages. This can take a while.
