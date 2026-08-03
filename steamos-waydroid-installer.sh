@@ -186,7 +186,7 @@ echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-startup-scrip
 echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-shutdown-scripts /usr/bin/waydroid-shutdown-scripts
 echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-mount /usr/bin/waydroid-mount
 echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-firewall /usr/bin/waydroid-firewall
-echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-install-cage /usr/bin/waydroid-install-cage
+#echo -e "$current_password\n" | sudo -S cp extras/scripts/waydroid-install-cage /usr/bin/waydroid-install-cage
 echo -e "$current_password\n" | sudo -S chmod +x /usr/bin/waydroid-startup-scripts /usr/bin/waydroid-shutdown-scripts /usr/bin/waydroid-mount /usr/bin/waydroid-firewall /usr/bin/waydroid-install-cage
 
 # custom sudoers file do not ask for sudo for the custom waydroid scripts
